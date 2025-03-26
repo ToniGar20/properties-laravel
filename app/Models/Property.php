@@ -28,4 +28,27 @@ class Property extends BaseProperty
     {
         return $this->hasMany(PropertyFeature::class, 'property_id');
     }
+
+    public function similarProperties()
+    {
+        $mainFeature = $this->features->first();
+        if (!$mainFeature) return collect();
+
+        $price = (float) $mainFeature->price;
+        $bedrooms = $mainFeature->bedrooms;
+
+        return self::where('id', '!=', $this->id)
+            ->where('location_id', $this->location_id)
+            ->where('properties_type_id', $this->properties_type_id)
+            ->whereHas('features', function ($query) use ($price, $bedrooms) {
+                $query
+                // ->where('price', '>=', $price - 10000)
+                // ->where('price', '<=', $price + 10000)
+                ->where('bedrooms', $bedrooms);
+            })
+            ->with(['location', 'type', 'agent', 'features'])
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+    }
 }

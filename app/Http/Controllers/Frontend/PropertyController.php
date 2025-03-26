@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use App\Services\VisitCounterService;
 
 class PropertyController extends Controller
 {
@@ -29,9 +30,12 @@ class PropertyController extends Controller
     }
     
 
-    public function show($id)
+    public function show($id, VisitCounterService $visitService)
     {
-        $property = Property::with(['agent', 'location', 'type', 'features'])->findOrFail($id);
-        return view('frontend.properties.show', compact('property'));
+        $property = Property::with(['location', 'type', 'agent', 'features'])->findOrFail($id);
+        $similarProperties = $property->similarProperties();
+        $userVisits = $visitService->register($property);
+    
+        return view('frontend.properties.show', compact('property', 'similarProperties', 'userVisits'));
     }
 }
