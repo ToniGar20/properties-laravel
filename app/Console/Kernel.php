@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('properties:export-unvisited')
+            ->weeklyOn(1, '3:00');
     }
 
     /**
