@@ -3,10 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PropertyController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/home-test-view', function () {
     return view('vendor.rw-real-estate.home');
 });
@@ -20,6 +16,10 @@ Route::get('/test-models', function () {
     return response()->json($property);
 });
 
-// Properties
+//Home
+use App\Http\Controllers\Frontend\HomeController;
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Properties pages
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{id}', [PropertyController::class, 'show'])->name('properties.show');
