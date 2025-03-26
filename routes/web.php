@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PropertyController;
+use App\Http\Controllers\Frontend\FavoriteController;
 
 Route::get('/home-test-view', function () {
     return view('vendor.rw-real-estate.home');
@@ -23,3 +24,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Properties pages
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{id}', [PropertyController::class, 'show'])->name('properties.show');
+
+//Property like
+Route::post('/properties/{id}/favorite', [FavoriteController::class, 'store'])->name('properties.favorite');

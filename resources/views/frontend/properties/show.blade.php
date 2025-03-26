@@ -22,6 +22,13 @@
 
 <hr>
 
+<form method="POST" action="{{ route('properties.favorite', $property->id) }}">
+    @csrf
+    <button type="submit">❤️ Save as favorite</button>
+</form>
+
+<hr>
+
 <p><strong>Total visits to property:</strong> {{ $property->visits }}</p>
 
 @if ($userVisits)
