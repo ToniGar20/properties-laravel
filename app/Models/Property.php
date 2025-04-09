@@ -21,7 +21,7 @@ class Property extends BaseProperty
 
     public function type()
     {
-        return $this->belongsTo(PropertyType::class, 'property_type_id');
+        return $this->belongsTo(PropertyType::class, 'properties_type_id');
     }
 
     public function features()

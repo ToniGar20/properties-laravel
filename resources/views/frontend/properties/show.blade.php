@@ -1,15 +1,15 @@
 <h1>{{ $property->name }}</h1>
 
 <p><strong>Description:</strong> {{ $property->description }}</p>
-<p><strong>Type:</strong> {{ $property->type->name ?? 'N/A' }}</p>
+<p><strong>Type:</strong> {{ $property->type->type ?? 'N/A' }}</p>
 
-<h3>Características</h3>
+<h3>Caracteristhics</h3>
 <ul>
 @foreach ($property->features as $feature)
     <li><strong>Price:</strong> {{ number_format($feature->price, 0, ',', '.') }} €</li>
-    <li><strong>Rooms:</strong> {{ $feature->rooms }}</li>
+    <li><strong>Bedrooms:</strong> {{ $feature->bedrooms }}</li>
     <li><strong>Bathroom:</strong> {{ $feature->bathrooms ?? 'N/A' }}</li>
-    <li><strong>Others:</strong> {{ $feature->description ?? '' }}</li>
+    <li><strong>Others:</strong> {{ $property->description ?? '' }}</li>
 @endforeach
 </ul>
 
